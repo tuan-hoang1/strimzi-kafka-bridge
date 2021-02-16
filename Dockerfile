@@ -1,4 +1,4 @@
-FROM centos:7
+FROM registry.access.redhat.com/ubi7:latest
 ARG JAVA_VERSION=11
 
 RUN yum -y update \
@@ -24,8 +24,8 @@ COPY target/kafka-bridge-${strimzi_kafka_bridge_version}/kafka-bridge-${strimzi_
 # Add Tini
 #####
 ENV TINI_VERSION v0.18.0
-ENV TINI_SHA256=12d20136605531b09a2c2dac02ccee85e1b874eb322ef6baf7561cd93f93c855
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
+ENV TINI_SHA256=c8aaa618ea7897f26979ea10920373e06f3e6dfeb41ef95342eda2eb5672f24d
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-s390x /usr/bin/tini
 RUN echo "${TINI_SHA256} */usr/bin/tini" | sha256sum -c \
     && chmod +x /usr/bin/tini
 
